@@ -1,0 +1,29 @@
+eType |PERSON     |-|-|-|-|-
+----  |----       |----  |----     |----    |----       |----  
+att   |id         |UINT  |-|-|-|-
+att   |idStr      |STRING|-|-|-|-
+att   |firstName  |STRING|-|-|-|-
+att   |lastName   |STRING|-|-|-|-
+att   |father     |ID    |PERSON   |-|-|-
+att   |mother     |ID    |PERSON   |-|-|-
+att   |cars       |ARRAY |ID       |CAR     |-|-
+-     |-|-|-|-|-|-
+-     |id         |idStr |firstName|lastName|father     |mother
+PERSON|0          |P0    |John     |root    |-          |-     
+PERSON|1          |P1    |Jane     |root    |-          |-     
+PERSON|2          |P2    |Jack     |root    |0          |1     
+CAR   |1          |-|-|-|-|-
+CAR   |3          |-|-|-|-|-
+-     |-|-|-|-|-|-
+eType |CAR        |-|-|-|-|-
+att   |id         |UINT  |-|-|-|-
+att   |idStr      |STRING|-|-|-|-
+att   |make       |STRING|-|-|-|-
+att   |model      |STRING|-|-|-|-
+att   |numberPlate|STRING|-|-|-|-
+-     |-|-|-|-|-|-
+-     |id         |idStr |make     |model   |numberPlate|-
+CAR   |0          |C0    |toyota   |corolla |X1256      |-     
+CAR   |1          |C1    |ford     |escort  |A1525      |-     
+CAR   |2          |C2    |kia      |pride   |M1546      |-     
+CAR   |3          |C3    |nissan   |datsun  |I5648      |-     
