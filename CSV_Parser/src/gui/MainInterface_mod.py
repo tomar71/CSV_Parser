@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from Tkinter import Frame, Tk, BOTH, Text, Menu, END, INSERT
+from Tkinter import Frame, BOTH, Text, Menu, END
 import tkFileDialog, tkMessageBox 
 
 from src.parser import Parser_csv_mod
@@ -51,8 +51,8 @@ class MainInterface(Frame):
         self.txt.pack(fill=BOTH, expand=1)
 
     def open_reqCSVcommand(self):
-        ftypes = [('Requirements CSV files', '*.csv')]
-        fileName = tkFileDialog.askopenfilename(filetypes=[("allfiles","*")])
+        ftypes = [('Comma Separated Values files', '*.csv')]
+        fileName = tkFileDialog.askopenfilename(filetypes=ftypes)
         if len(fileName) > 0:
             self.csvParser.parse(fileName)
             self.txt.insert(END, "Total number of lines parsed: " + str(self.csvParser.getTotalLinesCount()) + '\n')
@@ -61,24 +61,24 @@ class MainInterface(Frame):
                 self.txt.insert(END, str(self.csvParser.getLineData(i)) + '\n' )
             
     def save_reqCSVcommand(self):
-        ftypes = [('Requirements CSV files', '*.csv')]
-        fileName = tkFileDialog.asksaveasfilename(filetypes=[("allfiles","*")])
+        ftypes = [('Comma Separated Values files', '*.csv')]
+        fileName = tkFileDialog.asksaveasfilename(filetypes=ftypes)
         if len(fileName) > 0:
             self.csvGenerator.addData(self.csvParser.getData())
             self.csvGenerator.generate(fileName)
             self.txt.insert(END, "Total number of lines generated: " + str(self.csvGenerator.getTotalLinesCount()) + '\n')
 
     def save_reqDOXcommand(self):
-        ftypes = [('Requirements DOX files', '*.dox')]
-        fileName = tkFileDialog.asksaveasfilename(filetypes=[("allfiles","*")])
+        ftypes = [('Doxygen files', '*.dox')]
+        fileName = tkFileDialog.asksaveasfilename(filetypes=ftypes)
         if len(fileName) > 0:
             self.doxGenerator.addData(self.csvParser.getData())
             self.doxGenerator.generate(fileName)
             self.txt.insert(END, "Total number of lines generated: " + str(self.doxGenerator.getTotalLinesCount()) + '\n')
 
     def save_reqMMcommand(self):
-        ftypes = [('Requirements MM files', '*.mm')]
-        fileName = tkFileDialog.asksaveasfilename(filetypes=[("allfiles","*")])
+        ftypes = [('Mind Map files', '*.mm')]
+        fileName = tkFileDialog.asksaveasfilename(filetypes=ftypes)
         if len(fileName) > 0:
             self.mmGenerator.addData(self.csvParser.getData())
             self.mmGenerator.generate(fileName)
@@ -89,4 +89,4 @@ class MainInterface(Frame):
             self.parent.destroy()
      
     def about_command(self):
-        label = tkMessageBox.showinfo("About", "Parser project with GUI \n Copyright TOMAR\n No rights reserved")        
+        tkMessageBox.showinfo("About", "Parser project with GUI \n Copyright TOMAR\n No rights reserved")        
