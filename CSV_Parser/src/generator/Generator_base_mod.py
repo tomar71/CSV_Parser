@@ -23,6 +23,8 @@ class BaseGenerator(object):
     def setFile(self, fileName='', force=False):
         if force or fileName != '':
             self.fileName = fileName
+            return True
+        return False
 
     def addData(self, csvDataDict):
         if isinstance(csvDataDict, csvDictionary_mod.CSVDictionary):

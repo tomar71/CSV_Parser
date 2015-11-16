@@ -3,7 +3,7 @@ from Tkinter import Frame, Tk, BOTH, Text, Menu, END, INSERT
 import tkFileDialog, tkMessageBox 
 
 from src.parser import Parser_csv_mod
-from src.generator import Generator_csv_mod,Generator_dox_mod 
+from src.generator import Generator_csv_mod,Generator_dox_mod,Generator_mm_mod 
 
 class MainInterface(Frame):
     
@@ -16,6 +16,7 @@ class MainInterface(Frame):
         self.csvParser = Parser_csv_mod.Parser()
         self.csvGenerator = Generator_csv_mod.Generator()
         self.doxGenerator = Generator_dox_mod.Generator()
+        self.mmGenerator  = Generator_mm_mod.Generator()
         
     def initUI(self):
       
@@ -36,6 +37,7 @@ class MainInterface(Frame):
         filemenu.add_cascade(label="Save..." , menu=fileSaveMenu)
         fileSaveMenu.add_command(label="CSV..." , command=self.save_reqCSVcommand)
         fileSaveMenu.add_command(label="DOX..." , command=self.save_reqDOXcommand)
+        fileSaveMenu.add_command(label="MM..."  , command=self.save_reqMMcommand)
         
         filemenu.add_separator()
         filemenu.add_command(label="Exit"    , command=self.exit_command)
@@ -73,6 +75,14 @@ class MainInterface(Frame):
             self.doxGenerator.addData(self.csvParser.getData())
             self.doxGenerator.generate(fileName)
             self.txt.insert(END, "Total number of lines generated: " + str(self.doxGenerator.getTotalLinesCount()) + '\n')
+
+    def save_reqMMcommand(self):
+        ftypes = [('Requirements MM files', '*.mm')]
+        fileName = tkFileDialog.asksaveasfilename(filetypes=[("allfiles","*")])
+        if len(fileName) > 0:
+            self.mmGenerator.addData(self.csvParser.getData())
+            self.mmGenerator.generate(fileName)
+            self.txt.insert(END, "Total number of lines generated: " + str(self.mmGenerator.getTotalLinesCount()) + '\n')
                      
     def exit_command(self):
         if tkMessageBox.askokcancel("Quit", "Do you really want to quit?"):
