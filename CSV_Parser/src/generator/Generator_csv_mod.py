@@ -1,5 +1,4 @@
 from src.generator import Generator_base_mod
-from src.entity import csvDictionary_mod
 
 class GeneratorException(Exception):
     """Base class for GeneratorException related exceptions."""
