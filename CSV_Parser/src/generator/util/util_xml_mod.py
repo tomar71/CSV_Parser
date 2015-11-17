@@ -10,13 +10,16 @@ class util(object):
         if len(str(txt)) > 0 :   
             self.xmlFile.write(txt)
         
-    def openElementWoAtt(self, element):   
+    def openElementWoAtt(self, element, offset = 0):
+        self.addOffset(offset)
         self.xmlFile.write('<'+element+'>')
             
-    def closeElement(self, element):   
+    def closeElement(self, element, offset = 0):
+        self.addOffset(offset)   
         self.xmlFile.write('</'+element+'>')
         
-    def openElementWAtt(self, element):   
+    def openElementWAtt(self, element, offset = 0):
+        self.addOffset(offset)   
         self.xmlFile.write('<'+element)
     
     def addAttribute(self, attName, attValue):   
@@ -24,12 +27,22 @@ class util(object):
     
     def endElementWAtt(self):   
         self.xmlFile.write('>')
+
+    def closeElementImmediate(self):   
+        self.xmlFile.write('/>')
         
-    def closeElementWAtt(self, element):   
+    def closeElementWAtt(self, element, offset = 0):   
         self.endElementWAtt(element)
         self.newLn()
-        self.closeElement(element)
+        self.closeElement(element, offset)
         
-    def openCloseElementImmediate(self, element): 
-        self.openElementWAtt(element)
+    def openCloseElementImmediate(self, element, offset = 0): 
+        self.openElementWAtt(element, offset)
         self.xmlFile.write('/>')
+        
+    def addOffset(self, offset = 0):
+        space=""
+        for i in range(0,offset):
+            space = space + ' '
+        self.xmlFile.write(space)
+        
